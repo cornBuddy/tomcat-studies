@@ -1,8 +1,29 @@
 version: '3'
 
+networks:
+    java-net:
+        driver: bridge
+        ipam:
+            config:
+            -
+                subnet: 192.168.1.0/24
+
 services:
     tomcat:
         build: tomcat/.
+        ports:
+        - "8080:8080"
+        networks:
+            java-net:
+                ipv4_address: 192.168.1.2
+        volumes:
+        - "./tomcat/users.conf:/usr/local/tomcat/conf/tomcat-users.xml"
 
     httpd:
         build: httpd/.
+        networks:
+            java-net:
+                ipv4_address: 192.168.1.3
+        volumes:
+        - "./httpd/jk.conf:/etc/apache2/mods-available/jk.conf"
+        - "./httpd/workers.properties:/etc/libapache2-mod-jk/workers.properties"
