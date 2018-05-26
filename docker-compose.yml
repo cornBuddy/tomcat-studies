@@ -27,3 +27,4 @@ services:
         volumes:
         - "./httpd/jk.conf:/etc/apache2/mods-available/jk.conf"
         - "./httpd/workers.properties:/etc/libapache2-mod-jk/workers.properties"
+        - "./httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf"
