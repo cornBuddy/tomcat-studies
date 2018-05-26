@@ -9,21 +9,43 @@ networks:
                 subnet: 192.168.1.0/24
 
 services:
-    tomcat:
+    tom_a:
         build: tomcat/.
-        ports:
-        - "8080:8080"
         networks:
             java-net:
-                ipv4_address: 192.168.1.2
+                ipv4_address: 192.168.1.11
         volumes:
         - "./tomcat/users.conf:/usr/local/tomcat/conf/tomcat-users.xml"
+        - "./tomcat/a/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
+        - "./tomcat/a/server.xml:/usr/local/tomcat/conf/server.xml"
+
+    tom_b:
+        build: tomcat/.
+        networks:
+            java-net:
+                ipv4_address: 192.168.1.12
+        volumes:
+        - "./tomcat/users.conf:/usr/local/tomcat/conf/tomcat-users.xml"
+        - "./tomcat/b/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
+        - "./tomcat/b/server.xml:/usr/local/tomcat/conf/server.xml"
+
+    tom_c:
+        build: tomcat/.
+        networks:
+            java-net:
+                ipv4_address: 192.168.1.13
+        volumes:
+        - "./tomcat/users.conf:/usr/local/tomcat/conf/tomcat-users.xml"
+        - "./tomcat/c/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
+        - "./tomcat/c/server.xml:/usr/local/tomcat/conf/server.xml"
 
     httpd:
         build: httpd/.
         networks:
             java-net:
-                ipv4_address: 192.168.1.3
+                ipv4_address: 192.168.1.2
+        ports:
+        - "80:80"
         volumes:
         - "./httpd/jk.conf:/etc/apache2/mods-available/jk.conf"
         - "./httpd/workers.properties:/etc/libapache2-mod-jk/workers.properties"
