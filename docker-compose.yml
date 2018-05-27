@@ -17,10 +17,11 @@ services:
         ports:
         - "8080:8080"
         volumes:
-        - "./tomcat/users.conf:/usr/local/tomcat/conf/tomcat-users.xml"
         - "./tomcat/a/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
         - "./tomcat/a/server.xml:/usr/local/tomcat/conf/server.xml"
+        - "./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml"
         - "./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml"
+        - "./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml"
 
     tom_b:
         build: tomcat/.
@@ -28,10 +29,11 @@ services:
             java-net:
                 ipv4_address: 192.168.1.12
         volumes:
-        - "./tomcat/users.conf:/usr/local/tomcat/conf/tomcat-users.xml"
         - "./tomcat/b/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
         - "./tomcat/b/server.xml:/usr/local/tomcat/conf/server.xml"
+        - "./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml"
         - "./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml"
+        - "./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml"
 
     tom_c:
         build: tomcat/.
@@ -39,10 +41,11 @@ services:
             java-net:
                 ipv4_address: 192.168.1.13
         volumes:
-        - "./tomcat/users.conf:/usr/local/tomcat/conf/tomcat-users.xml"
         - "./tomcat/c/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
         - "./tomcat/c/server.xml:/usr/local/tomcat/conf/server.xml"
+        - "./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml"
         - "./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml"
+        - "./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml"
 
     httpd:
         build: httpd/.
