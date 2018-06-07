@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="catalina" packages="">
+    <Appenders>
+        <RollingRandomAccessFile name="catalina"
+            fileName="${sys:catalina.base}/logs/catalina.log"
+            filePattern="${sys:catalina.base}/logs/catalina/$${date:yyyy-MM}/catalina-%d{yyyy-MM-dd}-%i.log.zip">
+            <PatternLayout>
+                <Pattern>%d{MMM d, yyyy HH:mm:ss}: %5p (%F:%L) - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="250 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="100" />
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <!-- default loglevel for emaxx code -->
+        <logger name="org.apache.catalina" level="info">
+            <appender-ref ref="catalina" />
+        </logger>
+        <Root level="info">
+            <appender-ref ref="catalina" />
+        </Root>
+    </Loggers>
+</Configuration>

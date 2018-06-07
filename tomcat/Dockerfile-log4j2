@@ -1,0 +1,13 @@
+FROM tomcat:9-jre10
+
+ARG filename=apache-log4j-2.11.0-bin.tar.gz
+ARG log4j_dir=/opt/apache-log4j-2.11.0-bin
+
+RUN wget -P /opt/ \
+    http://ftp.byfly.by/pub/apache.org/logging/log4j/2.11.0/$filename \
+    && tar zxvf /opt/$filename -C /opt \
+    && rm /opt/$filename \
+    && cp $log4j_dir/log4j-core-2.11.0.jar /usr/local/tomcat/lib/ \
+    && cp $log4j_dir/log4j-api-2.11.0.jar /usr/local/tomcat/lib/ \
+    && cp $log4j_dir/log4j-jul-2.11.0.jar /usr/local/tomcat/lib/ \
+    && rm /usr/local/tomcat/conf/logging.properties
