@@ -34,7 +34,7 @@ services:
         volumes:
         - "./tomcat/b/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
         - "./tomcat/b/server.xml:/usr/local/tomcat/conf/server.xml"
-        - "./tomcat/b/log4j2.properties:/usr/local/tomcat/lib/log4j.properties"
+        - "./tomcat/b/log4j.properties:/usr/local/tomcat/lib/log4j.properties"
         - "./tomcat/clusterjsp.war:/usr/local/tomcat/webapps/clusterjsp.war"
         - "./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml"
         - "./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml"
