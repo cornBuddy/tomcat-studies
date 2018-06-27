@@ -11,6 +11,7 @@ networks:
 services:
     tom_a:
         build: tomcat/.
+        hostname: tom_a
         networks:
             java-net:
                 ipv4_address: 192.168.1.11
@@ -26,6 +27,7 @@ services:
         build:
             context: ./tomcat/.
             dockerfile: ./Dockerfile-log4j2
+        hostname: tom_b
         networks:
             java-net:
                 ipv4_address: 192.168.1.12
@@ -40,6 +42,7 @@ services:
 
     tom_c:
         build: tomcat/.
+        hostname: tom_c
         networks:
             java-net:
                 ipv4_address: 192.168.1.13
@@ -53,6 +56,7 @@ services:
 
     httpd:
         build: httpd/.
+        hostname: httpd
         networks:
             java-net:
                 ipv4_address: 192.168.1.2
