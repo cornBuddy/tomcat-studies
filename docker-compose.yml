@@ -1,20 +1,9 @@
 version: '3'
 
-networks:
-    java-net:
-        driver: bridge
-        ipam:
-            config:
-            -
-                subnet: 192.168.1.0/24
-
 services:
     tom_a:
         build: tomcat/.
         hostname: tom_a
-        networks:
-            java-net:
-                ipv4_address: 192.168.1.11
         volumes:
         - "./tomcat/a/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
         - "./tomcat/a/server.xml:/usr/local/tomcat/conf/server.xml"
@@ -28,9 +17,6 @@ services:
             context: ./tomcat/.
             dockerfile: ./Dockerfile-log4j2
         hostname: tom_b
-        networks:
-            java-net:
-                ipv4_address: 192.168.1.12
         volumes:
         - "./tomcat/b/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
         - "./tomcat/b/server.xml:/usr/local/tomcat/conf/server.xml"
@@ -43,9 +29,6 @@ services:
     tom_c:
         build: tomcat/.
         hostname: tom_c
-        networks:
-            java-net:
-                ipv4_address: 192.168.1.13
         volumes:
         - "./tomcat/c/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
         - "./tomcat/c/server.xml:/usr/local/tomcat/conf/server.xml"
@@ -57,9 +40,6 @@ services:
     httpd:
         build: httpd/.
         hostname: httpd
-        networks:
-            java-net:
-                ipv4_address: 192.168.1.2
         ports:
         - "80:80"
         volumes:
