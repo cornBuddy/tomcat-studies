@@ -1,6 +1,13 @@
 version: '3'
 
 services:
+    jenkins:
+        build: jenkins/.
+        hostname: jenkins
+        volumes:
+        - jenkins_home:/var/jenkins_home
+
+
     tom_a:
         build: tomcat/.
         hostname: tom_a
@@ -42,8 +49,13 @@ services:
         hostname: httpd
         ports:
         - "80:80"
+        - "8080:8080"
         volumes:
         - "./httpd/jk.conf:/etc/apache2/mods-available/jk.conf"
         - "./httpd/workers.properties:/etc/libapache2-mod-jk/workers.properties"
         - "./httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf"
         - "./httpd/vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf"
+
+volumes:
+    jenkins_home:
+
