@@ -6,6 +6,7 @@ services:
         hostname: jenkins
         volumes:
         - jenkins_home:/var/jenkins_home
+        - "./jenkins/jenkins-ssh:/var/jenkins_home/.ssh"
 
 
     tom_a:

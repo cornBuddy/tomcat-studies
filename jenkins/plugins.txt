@@ -1,2 +1,4 @@
 greenballs
 role-strategy
+workflow-aggregator
+scm-sync-configuration
