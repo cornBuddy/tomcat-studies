@@ -1,62 +1,61 @@
+---
 version: '3'
 
 services:
-    jenkins:
-        build: jenkins/.
-        hostname: jenkins
-        volumes:
-        - jenkins_home:/var/jenkins_home
-        - "./jenkins/jenkins-ssh:/var/jenkins_home/.ssh"
+  jenkins:
+    build: jenkins/.
+    hostname: jenkins
+    volumes:
+      - jenkins_home:/var/jenkins_home
 
 
-    tom_a:
-        build: tomcat/.
-        hostname: tom_a
-        volumes:
-        - "./tomcat/a/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
-        - "./tomcat/a/server.xml:/usr/local/tomcat/conf/server.xml"
-        - "./tomcat/clusterjsp.war:/usr/local/tomcat/webapps/clusterjsp.war"
-        - "./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml"
-        - "./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml"
-        - "./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml"
+  tom_a:
+    build: tomcat/.
+    hostname: tom_a
+    volumes:
+      - ./tomcat/a/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp
+      - ./tomcat/a/server.xml:/usr/local/tomcat/conf/server.xml
+      - ./tomcat/clusterjsp.war:/usr/local/tomcat/webapps/clusterjsp.war
+      - ./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+      - ./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
+      - ./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
 
-    tom_b:
-        build:
-            context: ./tomcat/.
-            dockerfile: ./Dockerfile-log4j2
-        hostname: tom_b
-        volumes:
-        - "./tomcat/b/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
-        - "./tomcat/b/server.xml:/usr/local/tomcat/conf/server.xml"
-        - "./tomcat/b/log4j.properties:/usr/local/tomcat/lib/log4j.properties"
-        - "./tomcat/clusterjsp.war:/usr/local/tomcat/webapps/clusterjsp.war"
-        - "./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml"
-        - "./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml"
-        - "./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml"
+  tom_b:
+    build:
+      context: ./tomcat/.
+      dockerfile: ./Dockerfile-log4j2
+    hostname: tom_b
+    volumes:
+      - ./tomcat/b/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp
+      - ./tomcat/b/server.xml:/usr/local/tomcat/conf/server.xml
+      - ./tomcat/b/log4j.properties:/usr/local/tomcat/lib/log4j.properties
+      - ./tomcat/clusterjsp.war:/usr/local/tomcat/webapps/clusterjsp.war
+      - ./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+      - ./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
+      - ./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
 
-    tom_c:
-        build: tomcat/.
-        hostname: tom_c
-        volumes:
-        - "./tomcat/c/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp"
-        - "./tomcat/c/server.xml:/usr/local/tomcat/conf/server.xml"
-        - "./tomcat/clusterjsp.war:/usr/local/tomcat/webapps/clusterjsp.war"
-        - "./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml"
-        - "./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml"
-        - "./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml"
+  tom_c:
+    build: tomcat/.
+    hostname: tom_c
+    volumes:
+      - ./tomcat/c/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp
+      - ./tomcat/c/server.xml:/usr/local/tomcat/conf/server.xml
+      - ./tomcat/clusterjsp.war:/usr/local/tomcat/webapps/clusterjsp.war
+      - ./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+      - ./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
+      - ./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
 
-    httpd:
-        build: httpd/.
-        hostname: httpd
-        ports:
-        - "80:80"
-        - "8080:8080"
-        volumes:
-        - "./httpd/jk.conf:/etc/apache2/mods-available/jk.conf"
-        - "./httpd/workers.properties:/etc/libapache2-mod-jk/workers.properties"
-        - "./httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf"
-        - "./httpd/vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf"
+  httpd:
+    build: httpd/.
+    hostname: httpd
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - ./httpd/jk.conf:/etc/apache2/mods-available/jk.conf
+      - ./httpd/workers.properties:/etc/libapache2-mod-jk/workers.properties
+      - ./httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./httpd/vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
 
 volumes:
-    jenkins_home:
-
+  jenkins_home:
