@@ -10,7 +10,7 @@ services:
       - ./jenkins/gitconfig:/var/jenkins_home/.gitconfig
 
 
-  tom_a:
+  tom-a:
     build: tomcat/.
     hostname: tom-a
     volumes:
@@ -21,7 +21,7 @@ services:
       - ./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
       - ./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
 
-  tom_b:
+  tom-b:
     build:
       context: ./tomcat/.
       dockerfile: ./Dockerfile-log4j2
@@ -35,7 +35,7 @@ services:
       - ./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
       - ./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
 
-  tom_c:
+  tom-c:
     build: tomcat/.
     hostname: tom-c
     volumes:
