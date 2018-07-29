@@ -1,1 +1,1 @@
-FROM tomcat:9-jre10-slim
+FROM tomcat:8-jre8

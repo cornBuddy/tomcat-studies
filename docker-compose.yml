@@ -6,12 +6,13 @@ services:
     build: jenkins/.
     hostname: jenkins
     volumes:
-      - jenkins_home:/var/jenkins_home
+      - /var/jenkins_home
+      - ./jenkins/gitconfig:/var/jenkins_home/.gitconfig
 
 
   tom_a:
     build: tomcat/.
-    hostname: tom_a
+    hostname: tom-a
     volumes:
       - ./tomcat/a/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp
       - ./tomcat/a/server.xml:/usr/local/tomcat/conf/server.xml
@@ -24,7 +25,7 @@ services:
     build:
       context: ./tomcat/.
       dockerfile: ./Dockerfile-log4j2
-    hostname: tom_b
+    hostname: tom-b
     volumes:
       - ./tomcat/b/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp
       - ./tomcat/b/server.xml:/usr/local/tomcat/conf/server.xml
@@ -36,7 +37,7 @@ services:
 
   tom_c:
     build: tomcat/.
-    hostname: tom_c
+    hostname: tom-c
     volumes:
       - ./tomcat/c/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp
       - ./tomcat/c/server.xml:/usr/local/tomcat/conf/server.xml
@@ -56,6 +57,3 @@ services:
       - ./httpd/workers.properties:/etc/libapache2-mod-jk/workers.properties
       - ./httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
       - ./httpd/vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
-
-volumes:
-  jenkins_home:
