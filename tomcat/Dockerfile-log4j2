@@ -1,7 +1,7 @@
 FROM tomcat:8-jre8
 
-ARG filename=apache-log4j-2.11.0-bin.tar.gz
-ARG log4j_url=http://ftp.byfly.by/pub/apache.org/logging/log4j/2.11.0/$filename
+ARG filename=apache-log4j-2.11.1-bin.tar.gz
+ARG log4j_url=http://ftp.byfly.by/pub/apache.org/logging/log4j/2.11.1/$filename
 ARG log4j_dir=/opt/apache-log4j-2.11.0-bin
 ARG juli_url=http://ftp.byfly.by/pub/apache.org/tomcat/tomcat-8/v8.0.52/bin/extras/tomcat-juli.jar
 ARG juli_adapters_url=http://ftp.byfly.by/pub/apache.org/tomcat/tomcat-8/v8.0.52/bin/extras/tomcat-juli-adapters.jar
@@ -15,5 +15,7 @@ RUN wget -P /opt/ $log4j_url \
     && rm /usr/local/tomcat/conf/logging.properties \
     && wget -P /usr/local/tomcat/lib $juli_adapters_url \
     && wget -P /usr/local/tomcat/bin $juli_url \
-    && rm /usr/local/tomcat/conf/logging.properties || true
+    && rm /usr/local/tomcat/conf/logging.properties || true \
+    && apt update \
+    && apt install -y python
 

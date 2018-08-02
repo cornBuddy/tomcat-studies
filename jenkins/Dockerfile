@@ -2,7 +2,7 @@ FROM jenkins/jenkins:lts
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 USER root
 RUN apt-get update \
-    && apt-get -y install git maven \
+    && apt-get -y install git maven ansible \
     && chown jenkins:jenkins /var/jenkins_home
 USER jenkins
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
