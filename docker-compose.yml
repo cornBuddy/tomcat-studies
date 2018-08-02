@@ -13,10 +13,9 @@ services:
   tom-a:
     build: tomcat/.
     hostname: tom-a
+    container_name: tom-a
     volumes:
-      - ./tomcat/a/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp
       - ./tomcat/a/server.xml:/usr/local/tomcat/conf/server.xml
-      - ./tomcat/clusterjsp.war:/usr/local/tomcat/webapps/clusterjsp.war
       - ./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml
       - ./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
       - ./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
@@ -26,11 +25,10 @@ services:
       context: ./tomcat/.
       dockerfile: ./Dockerfile-log4j2
     hostname: tom-b
+    container_name: tom-b
     volumes:
-      - ./tomcat/b/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp
       - ./tomcat/b/server.xml:/usr/local/tomcat/conf/server.xml
       - ./tomcat/b/log4j.properties:/usr/local/tomcat/lib/log4j.properties
-      - ./tomcat/clusterjsp.war:/usr/local/tomcat/webapps/clusterjsp.war
       - ./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml
       - ./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
       - ./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
@@ -38,10 +36,9 @@ services:
   tom-c:
     build: tomcat/.
     hostname: tom-c
+    container_name: tom-c
     volumes:
-      - ./tomcat/c/test.jsp:/usr/local/tomcat/webapps/ROOT/test.jsp
       - ./tomcat/c/server.xml:/usr/local/tomcat/conf/server.xml
-      - ./tomcat/clusterjsp.war:/usr/local/tomcat/webapps/clusterjsp.war
       - ./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml
       - ./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
       - ./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
