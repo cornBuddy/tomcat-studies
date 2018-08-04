@@ -8,6 +8,7 @@ services:
     volumes:
       - /var/jenkins_home
       - ./jenkins/gitconfig:/var/jenkins_home/.gitconfig
+      - ./jenkins/init.groovy.d:/var/jenkins_home/init.groovy.d
       - /var/run/docker.sock:/var/run/docker.sock
 
 

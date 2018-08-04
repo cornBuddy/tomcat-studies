@@ -15,7 +15,7 @@ RUN apt-get update \
     && chown jenkins:jenkins /var/jenkins_home \
     && usermod -aG docker jenkins
 RUN mkdir -p /ets/sudoers.d/ \
-    && echo "jenkins ALL=(ALL) NOPASSWD: /bin/chown" > /etc/sudoers.d/jenkins \
+    && echo "jenkins ALL=(ALL) NOPASSWD: /bin/chmod" > /etc/sudoers.d/jenkins \
     && /usr/sbin/visudo -cf /etc/sudoers.d/jenkins
 
 USER jenkins
@@ -24,3 +24,4 @@ ADD jenkins-ssh/ /var/jenkins_home/.ssh
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 RUN eval `ssh-agent -s` \
     && ssh-add
+WORKDIR /var/jenkins_home
