@@ -1,8 +1,9 @@
 FROM jenkins/jenkins:lts
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+
 USER root
 RUN apt-get update \
-    && apt-get -y install git ansible apt-transport-https \
+    && apt-get -y install git apt-transport-https \
         ca-certificates curl gnupg2 software-properties-common sudo \
     && curl -fsSL https://download.docker.com/linux/debian/gpg \
         | apt-key add - \

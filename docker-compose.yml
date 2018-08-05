@@ -5,6 +5,7 @@ services:
   jenkins:
     build: jenkins/.
     hostname: jenkins
+    container_name: jenkins
     volumes:
       - /var/jenkins_home
       - ./jenkins/gitconfig:/var/jenkins_home/.gitconfig
