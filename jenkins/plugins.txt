@@ -5,3 +5,4 @@ scm-sync-configuration
 github
 github-pullrequest
 ansible
+job-dsl
