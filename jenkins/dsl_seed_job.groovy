@@ -1,6 +1,6 @@
 REPO = 'MNT-Lab/d323dsl'
 STUDENT = 'hsakovich'
-BRANCH_LIST = [STUDENT, 'master']
+BRANCH_LIST = ['master', STUDENT]
 
 def getJobsToExecute(indexes) {
     indexes.collect { "MNTLAB-${STUDENT}-child${it}-build-job" }
@@ -12,9 +12,6 @@ def stringifyList(list) {
 }
 
 job("MNTLAB-${STUDENT}-main-build-job") {
-    scm {
-        github(REPO, 'master')
-    }
     parameters {
         activeChoiceParam('BUILDS_TRIGGER') {
             description('Select the jobs')
@@ -27,13 +24,37 @@ job("MNTLAB-${STUDENT}-main-build-job") {
         }
         choiceParam('BRANCH_NAME', BRANCH_LIST, 'Select target branch')
     }
+    steps {
+        downstreamParameterized {
+            trigger('$BUILDS_TRIGGER') {
+                block {
+                    buildStepFailure('FAILURE')
+                    failure('FAILURE')
+                    unstable('UNSTABLE')
+                }
+                parameters {
+                    predefinedProp('BRANCH_NAME', '$BRANCH_NAME')
+                }
+            }
+        }
+    }
 }
 
 getJobsToExecute((1..4)).each { jobName ->
     job(jobName) {
+        scm {
+            github(REPO, "${BRANCH_NAME}")
+        }
         steps {
-            shell('pwd')
-            shell('ls -la')
+            shell('bash ./script.sh > output.txt')
+            shell('cat output.txt')
+        }
+        publishers {
+            archiveArtifacts {
+                pattern('./output.txt')
+                onlyIfSuccessful()
+                allowEmpty(false)
+            }
         }
     }
 }
