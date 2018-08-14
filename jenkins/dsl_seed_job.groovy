@@ -9,9 +9,10 @@ job("MNTLAB-${STUDENT}-main-build-job") {
         github('MNT-Lab/d323dsl', 'master')
     }
     parameters {
-        gitParam('sha') {
+        gitParam('BRANCH_NAME') {
             type('BRANCH')
         }
+        choiceParam('BUILDS_TRIGGER', getJobsToExecute((1..4)))
     }
 }
 
