@@ -8,6 +8,11 @@ job("MNTLAB-${STUDENT}-main-build-job") {
     scm {
         github('MNT-Lab/d323dsl', 'master')
     }
+    parameters {
+        gitParam('sha') {
+            type('BRANCH')
+        }
+    }
 }
 
 getJobsToExecute((1..4)).each { jobName ->
