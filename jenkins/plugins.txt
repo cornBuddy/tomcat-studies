@@ -6,4 +6,4 @@ github
 github-pullrequest
 ansible
 job-dsl
-extended-choice-parameter
+uno-choice
