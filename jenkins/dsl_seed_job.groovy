@@ -22,7 +22,6 @@ job("MNTLAB-${STUDENT}-main-build-job") {
             filterable(false)
             groovyScript {
                 script(stringifyList(getJobsToExecute((1..4))))
-                // script('["choice1", "choice2"]')
                 fallbackScript('"fallback choice"')
             }
         }
