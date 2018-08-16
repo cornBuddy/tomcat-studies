@@ -7,3 +7,4 @@ github-pullrequest
 ansible
 job-dsl
 uno-choice
+parameterized-trigger

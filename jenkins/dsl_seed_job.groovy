@@ -63,12 +63,13 @@ getJobsToExecute((1..4)).each { jobName ->
         }
         steps {
             shell('bash ./script.sh > output.txt')
-            shell('git checkout $BRANCH_NAME')
-            shell('tar -czvf $REMOTE_BRANCH_dsl_script.tar.gz jobs.groovy')
+            shell('git checkout $REMOTE_BRANCH')
+            shell('tar -czvf ${REMOTE_BRANCH}_dsl_script.tar.gz jobs.groovy')
         }
         publishers {
             archiveArtifacts {
-                pattern('./output.txt')
+                pattern('**/${REMOTE_BRANCH}_dsl_script.tar.gz.txt')
+                pattern('**/output.txt')
                 onlyIfSuccessful()
                 allowEmpty(false)
             }
