@@ -6,6 +6,17 @@ def getJobsToExecute(indexes) {
     indexes.collect { "MNTLAB-${STUDENT}-child${it}-build-job" }
 }
 
+def getRemoteBranches() {
+    def proc = "git ls-remote --heads https://github.com/${REPO}"
+        .execute()
+    if (proc.waitFor() != 0) {
+        throw new Exception("get remote branches ${proc.text}")
+    }
+    proc.text.readLines().collect {
+        it.replaceAll(/[0-9a-z]{40}\s+refs\/heads\//, '')
+    }
+}
+
 def stringifyList(list) {
     def decoratedItems = list.collect { "'${it}'" }
     "[${decoratedItems.join(', ')}]"
@@ -42,12 +53,18 @@ job("MNTLAB-${STUDENT}-main-build-job") {
 
 getJobsToExecute((1..4)).each { jobName ->
     job(jobName) {
+        parameters {
+            choiceParam('REMOTE_BRANCH', getRemoteBranches())
+            // workaround for Parameterized Trigger Plugin
+            stringParam('BRANCH_NAME', '$BRANCH_NAME', 'WORKAROUND')
+        }
         scm {
-            github(REPO, "${BRANCH_NAME}")
+            github(REPO, '$BRANCH_NAME')
         }
         steps {
             shell('bash ./script.sh > output.txt')
-            shell('cat output.txt')
+            shell('git checkout $BRANCH_NAME')
+            shell('tar -czvf $REMOTE_BRANCH_dsl_script.tar.gz jobs.groovy')
         }
         publishers {
             archiveArtifacts {
