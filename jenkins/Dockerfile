@@ -3,8 +3,9 @@ COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 
 USER root
 RUN apt-get update \
-    && apt-get -y install git apt-transport-https \
+    && apt-get -y install git python-pip apt-transport-https \
         ca-certificates curl gnupg2 software-properties-common sudo \
+    && pip install 'ansible==2.6.3' \
     && curl -fsSL https://download.docker.com/linux/debian/gpg \
         | apt-key add - \
     && apt-key fingerprint 0EBFCD88 \
