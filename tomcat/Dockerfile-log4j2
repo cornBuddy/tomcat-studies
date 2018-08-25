@@ -18,10 +18,3 @@ RUN wget -P /opt/ $log4j_url \
     && rm /usr/local/tomcat/conf/logging.properties || true \
     && apt update \
     && apt install -y python
-
-RUN useradd tomcat \
-    && groupadd tomcat \
-    && usermod -a -G tomcat tomcat \
-    && chown -R tomcat:tomcat $CATALINA_HOME
-
-USER tomcat
