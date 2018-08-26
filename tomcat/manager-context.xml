@@ -17,4 +17,6 @@
 -->
 <Context antiResourceLocking="false" privileged="true" >
   <Manager sessionAttributeValueClassNameFilter="java\.lang\.(?:Boolean|Integer|Long|Number|String)|org\.apache\.catalina\.filters\.CsrfPreventionFilter\$LruCache(?:\$1)?|java\.util\.(?:Linked)?HashMap"/>
+  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.0\.0\.1" />
 </Context>
