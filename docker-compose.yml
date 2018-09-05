@@ -26,7 +26,7 @@ services:
 
   tom-b:
     build:
-      context: ./tomcat/.
+      context: tomcat/.
       dockerfile: ./Dockerfile-log4j2
     hostname: tom-b
     container_name: tom-b
@@ -54,8 +54,23 @@ services:
     ports:
       - 80:80
       - 8080:8080
+      - 9000:9000
     volumes:
       - ./httpd/jk.conf:/etc/apache2/mods-available/jk.conf
       - ./httpd/workers.properties:/etc/libapache2-mod-jk/workers.properties
       - ./httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
       - ./httpd/vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+
+  postgres:
+    build: postgres/.
+    image: postgres:10.5
+    hostname: postgres
+    container_name: postgres
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+
+  sonarqube:
+    build: sonarqube/.
+    hostname: sonarqube
+    container_name: sonarqube

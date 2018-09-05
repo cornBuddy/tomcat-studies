@@ -1,0 +1,5 @@
+FROM sonarqube:6.7.5
+
+ENV SONARQUBE_JDBC_USERNAME=sonar
+ENV SONARQUBE_JDBC_PASSWORD=sonar
+ENV SONARQUBE_JDBC_URL=jdbc:postgresql://postgres/sonar
