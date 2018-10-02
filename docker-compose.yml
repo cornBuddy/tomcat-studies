@@ -62,7 +62,6 @@ services:
       - ./httpd/vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
 
   postgres:
-    build: postgres/.
     image: postgres:10.5
     hostname: postgres
     container_name: postgres

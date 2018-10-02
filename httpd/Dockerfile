@@ -1,5 +1,7 @@
 FROM httpd:2
 
+EXPOSE 9000
+
 RUN apt-get -y update \
     && apt-get -y install python libapache2-mod-jk \
     && mkdir -p /var/log/apache2 \
