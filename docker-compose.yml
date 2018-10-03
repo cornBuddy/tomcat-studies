@@ -10,7 +10,6 @@ services:
       - /var/jenkins_home
       - ./jenkins/gitconfig:/var/jenkins_home/.gitconfig
       - ./jenkins/init.groovy.d:/var/jenkins_home/init.groovy.d
-      - ./jenkins/dsl_seed_job.groovy:/var/jenkins_home/workspace/dsl-seed-job/dsl_seed_job.groovy
       - /var/run/docker.sock:/var/run/docker.sock
 
 
