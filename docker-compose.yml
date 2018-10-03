@@ -58,7 +58,9 @@ services:
       - ./httpd/jk.conf:/etc/apache2/mods-available/jk.conf
       - ./httpd/workers.properties:/etc/libapache2-mod-jk/workers.properties
       - ./httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
-      - ./httpd/vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+      - ./httpd/tomcat.conf:/usr/local/apache2/conf/extra/tomcat-vhosts.conf
+      - ./httpd/jenkins.conf:/usr/local/apache2/conf/extra/jenkins-vhosts.conf
+      - ./httpd/sonar.conf:/usr/local/apache2/conf/extra/sonar-vhosts.conf
 
   postgres:
     image: postgres:10.5
