@@ -1,10 +1,10 @@
 greenballs
 role-strategy
 workflow-aggregator
-scm-sync-configuration
 github
 github-pullrequest
 ansible
 job-dsl
 uno-choice
 parameterized-trigger
+sonar

@@ -24,6 +24,7 @@ USER jenkins
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 ENV DEPLOYER deployer
 ENV DEPLOYER_PASSWORD s3cret
+ENV SONAR_URL http://sonarqube:9000
 ADD jenkins-ssh/ /var/jenkins_home/.ssh
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 RUN eval `ssh-agent -s` \

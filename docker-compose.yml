@@ -1,5 +1,5 @@
 ---
-version: '3'
+version: '3.5'
 
 services:
   jenkins:
@@ -11,6 +11,8 @@ services:
       - ./jenkins/gitconfig:/var/jenkins_home/.gitconfig
       - ./jenkins/init.groovy.d:/var/jenkins_home/init.groovy.d
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - tomcat-net
 
 
   tom-a:
@@ -22,6 +24,8 @@ services:
       - ./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml
       - ./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
       - ./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
+    networks:
+      - tomcat-net
 
   tom-b:
     build:
@@ -35,6 +39,8 @@ services:
       - ./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml
       - ./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
       - ./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
+    networks:
+      - tomcat-net
 
   tom-c:
     build: tomcat/.
@@ -45,6 +51,8 @@ services:
       - ./tomcat/users.xml:/usr/local/tomcat/conf/tomcat-users.xml
       - ./tomcat/web.xml:/usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
       - ./tomcat/manager-context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
+    networks:
+      - tomcat-net
 
   httpd:
     build: httpd/.
@@ -61,6 +69,8 @@ services:
       - ./httpd/tomcat.conf:/usr/local/apache2/conf/extra/tomcat-vhosts.conf
       - ./httpd/jenkins.conf:/usr/local/apache2/conf/extra/jenkins-vhosts.conf
       - ./httpd/sonar.conf:/usr/local/apache2/conf/extra/sonar-vhosts.conf
+    networks:
+      - tomcat-net
 
   postgres:
     image: postgres:10.5
@@ -68,9 +78,17 @@ services:
     container_name: postgres
     volumes:
       - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - tomcat-net
 
 
   sonarqube:
     build: sonarqube/.
     hostname: sonarqube
     container_name: sonarqube
+    networks:
+      - tomcat-net
+
+networks:
+  tomcat-net:
+    name: tomcat-net
